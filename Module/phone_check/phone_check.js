@@ -6,11 +6,11 @@
  *
  *   And can check the state of phone number for s and h typed phones.
  *   **********************************************
- *   When i am writing this codes, only me and god understand what is going on! but after a while
- *   only god will understand what is going on! so dont waste your time changing it!
+ * 
+ *   https://github.com/pooyabe
  */
 
-class phone_check {
+module.exports = class phone_check {
   constructor(phone) {
     // Get phone number and delete zero from begining
     this.phone = phone.toString();
@@ -152,4 +152,4 @@ class phone_check {
       return "0";
     }
   }
-}
+};
