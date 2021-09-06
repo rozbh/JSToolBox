@@ -1,9 +1,11 @@
-const https = require('https');
-const fs = require('fs');
-module.exports.Downloader = async (url, name) => {
+const { get } = require('https');
+const { createWriteStream } = require('fs');
+const { join } = require('path')
+
+const Downloader = async (DlPath, url, name) => {
     return new Promise((resovle, reject) => {
-        const file = fs.createWriteStream(`path/to/dir/${name}.jpg`);
-        https.get(url, function (response) {
+        const file = createWriteStream(join(DlPath, name));
+        get(url, function (response) {
             response.pipe(file);
             file.on('finish', function (cb) {
                 file.close(cb);
@@ -15,3 +17,4 @@ module.exports.Downloader = async (url, name) => {
         });
     })
 }
+module.exports = { Downloader }
