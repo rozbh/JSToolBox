@@ -25,3 +25,23 @@ export const detectBank = (cardNumber) => {
   });
   return bank;
 };
+
+export const validateIBAN = (IBANNumber) => {
+  if (!IBANNumber) return true;
+  const stringIBANNumber = String(IBANNumber);
+  if (stringIBANNumber.length !== 24) return "شماره شبا باید ۲۶ رقم باشد";
+  const validateNumber = BigInt(`${stringIBANNumber.slice(2)}1827${stringIBANNumber.slice(0, 2)}`);
+  if (validateNumber % BigInt(97) === BigInt(1)) return true;
+
+  return "شماره شبا معتبر نمیباشد";
+};
+
+export const detectBankByIBAN = (IBAN) => {
+  if (!IBAN) return false;
+  const bankId = IBAN.slice(2, 5);
+  const bank = bankList.find((item) => {
+    if (bankId === item.bankId) return item;
+    return false;
+  });
+  return bank;
+};
